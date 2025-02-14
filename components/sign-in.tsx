@@ -1,11 +1,12 @@
 "use client";
 
 import { login } from "@/lib/authAction";
+import { Button } from "./ui/button";
 
 export default function SignIn() {
   return (
     <div>
-      <button onClick={() => login()}>Signin with Google</button>
+      <Button onClick={() => login()}>Masuk dengan Google</Button>
     </div>
   );
 }

@@ -23,7 +23,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link href="/student">
-                <Button size="lg" className="w-full sm:w-auto">
+                <Button className="w-full sm:w-auto">
                   Dashboard Siswa
                   <ArrowRightCircle className="ml-2 h-5 w-5" />
                 </Button>
