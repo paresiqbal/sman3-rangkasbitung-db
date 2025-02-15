@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Menu, User, LogOut, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -17,6 +16,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import Signout from "./sign-out";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -34,16 +34,6 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  const router = useRouter();
-
-  const logout = async () => {
-    // Implement your logout logic here
-    // For example:
-    // await fetch('/api/logout', { method: 'POST' })
-    // Clear any local storage or cookies
-    router.push("/login");
-  };
-
   return (
     <nav className="border-b">
       <div className="flex h-16 items-center px-4">
@@ -123,27 +113,7 @@ export default function Navbar() {
           </nav>
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
-            {/* Add search or other elements here if needed */}
-          </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="relative h-8 w-8 rounded-full"
-              >
-                <User className="h-5 w-5" />
-                <span className="sr-only">Open user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={logout}>
-                <LogOut className="mr-2 h-4 w-4" />
-                <span>Log out</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Signout />
         </div>
       </div>
     </nav>
