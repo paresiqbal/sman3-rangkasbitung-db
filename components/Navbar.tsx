@@ -26,7 +26,7 @@ const navItems = [
     href: "#",
     items: [
       { name: "Tugas Siswa", href: "#" },
-      { name: "Dokumen Akademik", href: "/dashboard/student-task" },
+      { name: "Dokumen Akademik", href: "/dashboard/academic/student-task" },
     ],
   },
   {
