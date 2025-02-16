@@ -93,7 +93,7 @@ export default function Navbar() {
               width={50}
               height={50}
             />
-            <span className="hidden font-bold sm:inline-block">SMKN 3</span>
+            <span className="hidden font-bold sm:inline-block">Cloud DB</span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
             {navItems.map((item, index) =>
