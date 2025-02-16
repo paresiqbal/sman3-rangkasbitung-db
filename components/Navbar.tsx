@@ -17,10 +17,10 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import Signout from "./sign-out";
+import Image from "next/image";
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
   {
     name: "Services",
     href: "#",
@@ -30,7 +30,6 @@ const navItems = [
       { name: "Design", href: "/services/design" },
     ],
   },
-  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -80,7 +79,14 @@ export default function Navbar() {
         </Sheet>
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="hidden font-bold sm:inline-block">ACME Inc</span>
+            <Image
+              src="/assets/logo.png"
+              alt="Logo"
+              className="h-8 w-8"
+              width={50}
+              height={50}
+            />
+            <span className="hidden font-bold sm:inline-block">SMKN 3</span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
             {navItems.map((item, index) =>
