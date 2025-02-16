@@ -22,12 +22,19 @@ import Image from "next/image";
 const navItems = [
   { name: "Home", href: "/" },
   {
-    name: "Services",
+    name: "Akademik",
     href: "#",
     items: [
-      { name: "Consulting", href: "/services/consulting" },
-      { name: "Development", href: "/services/development" },
-      { name: "Design", href: "/services/design" },
+      { name: "Tugas Siswa", href: "#" },
+      { name: "Dokumen Akademik", href: "#" },
+    ],
+  },
+  {
+    name: "Staf & Guru",
+    href: "#",
+    items: [
+      { name: "Dokumen Kepegawaian", href: "#" },
+      { name: "SOP", href: "#" },
     ],
   },
 ];
