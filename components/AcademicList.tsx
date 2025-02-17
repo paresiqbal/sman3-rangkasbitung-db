@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,36 +25,47 @@ export function AcademicList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const searchFiles = useCallback(async () => {
-    if (!searchQuery.trim()) {
-      setFiles([]);
-      return;
-    }
-
+  const fetchFiles = useCallback(async (query = "") => {
     try {
+      // Fetch all files from the storage bucket
       const { data, error } = await supabase.storage
-        .from("student-documents")
-        .list("academic-documents");
+        .from("academic-documents")
+        .list("academic");
 
       if (error) throw error;
 
       if (data) {
-        const filteredFiles = data
-          .filter((file) =>
-            file.name.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-          .map((file) => ({
-            name: file.name,
-            size: file.metadata?.size || 0,
-            lastModified: file.updated_at || new Date().toISOString(),
-          }));
+        // Map data to our File interface
+        const mappedFiles = data.map((file) => ({
+          name: file.name,
+          size: file.metadata?.size || 0,
+          lastModified: file.updated_at || new Date().toISOString(),
+        }));
+
+        // If the query is not empty, filter the results
+        const filteredFiles = query
+          ? mappedFiles.filter((file) =>
+              file.name.toLowerCase().includes(query.toLowerCase())
+            )
+          : mappedFiles;
+
         setFiles(filteredFiles);
       }
     } catch (err: unknown) {
-      console.error("Error searching files:", err);
+      console.error("Error fetching files:", err);
       setError("Failed to fetch files. Please try again later.");
     }
-  }, [searchQuery]);
+  }, []);
+
+  // Fetch files on component mount
+  useEffect(() => {
+    fetchFiles();
+  }, [fetchFiles]);
+
+  // This function will be triggered by the search button.
+  const searchFiles = useCallback(async () => {
+    fetchFiles(searchQuery);
+  }, [fetchFiles, searchQuery]);
 
   const handleDownload = async (fileName: string) => {
     try {
