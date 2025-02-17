@@ -27,7 +27,6 @@ export function AcademicList() {
 
   const fetchFiles = useCallback(async (query = "") => {
     try {
-      // Fetch all files from the storage bucket
       const { data, error } = await supabase.storage
         .from("academic-documents")
         .list("academic");
@@ -35,14 +34,12 @@ export function AcademicList() {
       if (error) throw error;
 
       if (data) {
-        // Map data to our File interface
         const mappedFiles = data.map((file) => ({
           name: file.name,
           size: file.metadata?.size || 0,
           lastModified: file.updated_at || new Date().toISOString(),
         }));
 
-        // If the query is not empty, filter the results
         const filteredFiles = query
           ? mappedFiles.filter((file) =>
               file.name.toLowerCase().includes(query.toLowerCase())
@@ -57,12 +54,10 @@ export function AcademicList() {
     }
   }, []);
 
-  // Fetch files on component mount
   useEffect(() => {
     fetchFiles();
   }, [fetchFiles]);
 
-  // This function will be triggered by the search button.
   const searchFiles = useCallback(async () => {
     fetchFiles(searchQuery);
   }, [fetchFiles, searchQuery]);
