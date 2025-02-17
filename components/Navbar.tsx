@@ -20,7 +20,6 @@ import Signout from "./sign-out";
 import Image from "next/image";
 
 const navItems = [
-  { name: "Home", href: "/" },
   {
     name: "Akademik",
     href: "#",
@@ -85,7 +84,7 @@ export default function Navbar() {
           </SheetContent>
         </Sheet>
         <div className="mr-4 hidden md:flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
+          <Link href="/dashboard" className="mr-6 flex items-center space-x-2">
             <Image
               src="/assets/logo.png"
               alt="Logo"
