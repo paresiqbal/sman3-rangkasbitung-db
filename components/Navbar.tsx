@@ -42,6 +42,10 @@ const navItems = [
       { name: "SOP", href: "/dashboard/employee/sop-documents" },
     ],
   },
+  {
+    name: "Dokumen Pendukung",
+    href: "/dashboard/support/support-documents",
+  },
 ];
 
 export default function Navbar() {
