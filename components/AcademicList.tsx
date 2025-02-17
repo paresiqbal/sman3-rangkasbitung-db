@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import supabase from "@/lib/supabase";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import supabase from "@/lib/supabase";
+import { useToast } from "@/hooks/use-toast";
 import { Search, Trash } from "lucide-react";
 
 interface File {
@@ -24,6 +25,7 @@ export function AcademicList() {
   const [files, setFiles] = useState<File[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const { toast } = useToast();
 
   const fetchFiles = useCallback(async (query = "") => {
     try {
@@ -90,7 +92,14 @@ export function AcademicList() {
 
       if (error) throw error;
 
+      // Refresh files after successful deletion.
       fetchFiles(searchQuery);
+
+      // Display a success toast.
+      toast({
+        title: "File Deleted",
+        description: `${fileName} has been successfully deleted.`,
+      });
     } catch (err: unknown) {
       console.error("Error deleting file:", err);
       setError("Failed to delete file. Please try again.");
