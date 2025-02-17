@@ -65,8 +65,8 @@ export function AcademicList() {
   const handleDownload = async (fileName: string) => {
     try {
       const { data, error } = await supabase.storage
-        .from("task")
-        .createSignedUrl(`uploads/${fileName}`, 60);
+        .from("academic-documents")
+        .createSignedUrl(`academic/${fileName}`, 60);
 
       if (error) throw error;
 
@@ -79,6 +79,21 @@ export function AcademicList() {
     } catch (err: unknown) {
       console.error("Error downloading file:", err);
       setError("Failed to download file. Please try again.");
+    }
+  };
+
+  const handleDelete = async (fileName: string) => {
+    try {
+      const { error } = await supabase.storage
+        .from("academic-documents")
+        .remove([`academic/${fileName}`]);
+
+      if (error) throw error;
+
+      fetchFiles(searchQuery);
+    } catch (err: unknown) {
+      console.error("Error deleting file:", err);
+      setError("Failed to delete file. Please try again.");
     }
   };
 
@@ -117,7 +132,7 @@ export function AcademicList() {
                 <Button onClick={() => handleDownload(file.name)}>
                   Download
                 </Button>
-                <Button>
+                <Button onClick={() => handleDelete(file.name)}>
                   <Trash className="w-4 h-4" />
                 </Button>
               </TableCell>
