@@ -27,34 +27,43 @@ export function AcademicList() {
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
-  const fetchFiles = useCallback(async (query = "") => {
-    try {
-      const { data, error } = await supabase.storage
-        .from("academic-documents")
-        .list("academic");
+  const fetchFiles = useCallback(
+    async (query = "") => {
+      try {
+        const { data, error } = await supabase.storage
+          .from("academic-documents")
+          .list("academic");
 
-      if (error) throw error;
+        if (error) throw error;
 
-      if (data) {
-        const mappedFiles = data.map((file) => ({
-          name: file.name,
-          size: file.metadata?.size || 0,
-          lastModified: file.updated_at || new Date().toISOString(),
-        }));
+        if (data) {
+          const mappedFiles = data.map((file) => ({
+            name: file.name,
+            size: file.metadata?.size || 0,
+            lastModified: file.updated_at || new Date().toISOString(),
+          }));
 
-        const filteredFiles = query
-          ? mappedFiles.filter((file) =>
-              file.name.toLowerCase().includes(query.toLowerCase())
-            )
-          : mappedFiles;
+          const filteredFiles = query
+            ? mappedFiles.filter((file) =>
+                file.name.toLowerCase().includes(query.toLowerCase())
+              )
+            : mappedFiles;
 
-        setFiles(filteredFiles);
+          setFiles(filteredFiles);
+
+          // Show a toast when files are successfully fetched.
+          toast({
+            title: "Files Fetched",
+            description: `Successfully fetched ${filteredFiles.length} file(s).`,
+          });
+        }
+      } catch (err: unknown) {
+        console.error("Error fetching files:", err);
+        setError("Failed to fetch files. Please try again later.");
       }
-    } catch (err: unknown) {
-      console.error("Error fetching files:", err);
-      setError("Failed to fetch files. Please try again later.");
-    }
-  }, []);
+    },
+    [toast]
+  );
 
   useEffect(() => {
     fetchFiles();
@@ -77,6 +86,12 @@ export function AcademicList() {
         link.href = data.signedUrl;
         link.download = fileName;
         link.click();
+
+        // Show toast when download is successfully initiated.
+        toast({
+          title: "Download Started",
+          description: `${fileName} is being downloaded.`,
+        });
       }
     } catch (err: unknown) {
       console.error("Error downloading file:", err);
