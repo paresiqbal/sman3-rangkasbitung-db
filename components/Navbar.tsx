@@ -35,7 +35,10 @@ const navItems = [
     name: "Staf & Guru",
     href: "#",
     items: [
-      { name: "Dokumen Kepegawaian", href: "#" },
+      {
+        name: "Dokumen Kepegawaian",
+        href: "/dashboard/employee/employee-documents",
+      },
       { name: "SOP", href: "#" },
     ],
   },

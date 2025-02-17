@@ -77,7 +77,7 @@ export function EmployeeList() {
     try {
       const { data, error } = await supabase.storage
         .from("academic-documents")
-        .createSignedUrl(`academic/${fileName}`, 60);
+        .createSignedUrl(`employee/${fileName}`, 60);
 
       if (error) throw error;
 
