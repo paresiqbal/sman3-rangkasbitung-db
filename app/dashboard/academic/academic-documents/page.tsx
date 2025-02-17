@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export default function StudentTask() {
+export default function AcademicDocument() {
   return (
     <div className="container mx-auto mt-10 p-4 max-w-7xl">
       <h1 className="text-2xl font-bold">Dokumen Akademik</h1>
