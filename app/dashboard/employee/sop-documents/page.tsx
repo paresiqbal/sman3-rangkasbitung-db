@@ -1,7 +1,7 @@
 "use client";
 
-import { EmployeeForm } from "@/components/EmployeeForm";
-import { EmployeeList } from "@/components/EmployeeList";
+import { SopForm } from "@/components/SopForm";
+import { SopList } from "@/components/SopList";
 import {
   Card,
   CardContent,
@@ -10,15 +10,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export default function EmployeeDocument() {
+export default function SopDocument() {
   return (
     <div className="container mx-auto mt-10 p-4 max-w-7xl">
       <h1 className="text-2xl font-bold">Dokumen Karyawan</h1>
       <p className="mb-8">
-        Dokumen karyawan, seperti SK, KTP, NPWP, dan lain-lain.
+        Dokumen Standart Operasional Prosedur (SOP) perusahaan.
       </p>
       <div className="mb-8">
-        <EmployeeForm />
+        <SopForm />
       </div>
 
       <Card>
@@ -27,7 +27,7 @@ export default function EmployeeDocument() {
           <CardDescription>List dokumen.</CardDescription>
         </CardHeader>
         <CardContent>
-          <EmployeeList />
+          <SopList />
         </CardContent>
       </Card>
     </div>
