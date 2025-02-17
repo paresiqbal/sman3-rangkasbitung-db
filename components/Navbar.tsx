@@ -39,7 +39,7 @@ const navItems = [
         name: "Dokumen Kepegawaian",
         href: "/dashboard/employee/employee-documents",
       },
-      { name: "SOP", href: "#" },
+      { name: "SOP", href: "/dashboard/employee/sop-documents" },
     ],
   },
 ];
