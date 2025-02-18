@@ -11,8 +11,9 @@ export function LandingNavbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    { name: "Home", href: "/" },
-    { name: "Dashboard", href: "/dashboard" },
+    { name: "Home", href: "/landing" },
+    { name: "Siswa", href: "/landing/student-task" },
+    { name: "Umum", href: "/landing/supporting-documents" },
   ];
 
   return (
@@ -20,10 +21,7 @@ export function LandingNavbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
-            <Link
-              href="/dashboard"
-              className="mr-6 flex items-center space-x-2"
-            >
+            <Link href="/" className="mr-6 flex items-center space-x-2">
               <Image
                 src="/assets/logo.png"
                 alt="Logo"
