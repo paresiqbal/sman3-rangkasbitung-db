@@ -4,11 +4,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
 
 export function SupportDocForm() {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState<string | null>(null);
+  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,6 +30,10 @@ export function SupportDocForm() {
 
       if (response.ok) {
         setUploadStatus("File uploaded successfully!");
+        toast({
+          title: "Upload Successful",
+          description: "Your support document has been uploaded successfully.",
+        });
       } else {
         setUploadStatus("Failed to upload file.");
       }
