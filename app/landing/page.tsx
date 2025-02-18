@@ -25,7 +25,7 @@ export default function LandingPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Link href="/student/tasks">
+            <Link href="/student-task">
               <Button>Cari dan kumpulkan tugas</Button>
             </Link>
           </CardContent>
@@ -39,7 +39,7 @@ export default function LandingPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Link href="/student/tasks">
+            <Link href="/supporting-document">
               <Button>Cari dokumen umum</Button>
             </Link>
           </CardContent>
