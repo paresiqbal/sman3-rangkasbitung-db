@@ -21,7 +21,7 @@ export function SupportDocForm() {
     formData.append("file", file);
 
     try {
-      const response = await fetch("/api/mongo-api", {
+      const response = await fetch("/api/support-documents", {
         method: "POST",
         body: formData,
       });
