@@ -37,9 +37,7 @@ export function SupportDocList() {
 
     try {
       const response = await fetch(
-        `/api/support-documents/search-search?query=${encodeURIComponent(
-          searchQuery
-        )}`
+        `/api/support-documents/search?query=${encodeURIComponent(searchQuery)}`
       );
 
       if (response.ok) {
@@ -58,9 +56,7 @@ export function SupportDocList() {
 
   const handleDownload = async (fileId: string, filename: string) => {
     try {
-      const response = await fetch(
-        `/api/support-documents/download-download/${fileId}`
-      );
+      const response = await fetch(`/api/support-documents/download/${fileId}`);
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
