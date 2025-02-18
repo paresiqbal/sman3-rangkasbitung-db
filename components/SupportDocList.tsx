@@ -87,6 +87,25 @@ export function SupportDocList() {
     }
   };
 
+  const handleDelete = async (fileId: string) => {
+    try {
+      const response = await fetch(`/api/support-documents/delete/${fileId}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.message);
+        // Optionally, update your file list after deletion
+        setFiles((prev) => prev.filter((file) => file._id !== fileId));
+      } else {
+        const data = await response.json();
+        console.error("Failed to delete file:", data.error);
+      }
+    } catch (err) {
+      console.error("Error deleting file:", err);
+    }
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex gap-2">
@@ -122,7 +141,7 @@ export function SupportDocList() {
                 <Button onClick={() => handleDownload(file._id, file.filename)}>
                   Unduh
                 </Button>
-                <Button>
+                <Button onClick={() => handleDelete(file._id)}>
                   <Trash className="h-4 w-4" />
                 </Button>
               </TableCell>
