@@ -12,7 +12,7 @@ import Link from "next/link";
 
 export default function LandingPage() {
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-8">
       <h1 className="text-3xl font-bold mb-6">
         Selamat Datang di Cloud Database SMA Negeri 3 Rangkasbitung
       </h1>
