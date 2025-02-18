@@ -15,10 +15,8 @@ import {
 export default function SupportDocuments() {
   return (
     <div className="container mx-auto mt-10 p-4 max-w-7xl">
-      <h1 className="text-2xl font-bold">Rencana dan Evaluasi</h1>
-      <p className="mb-8">
-        Rencana Kerja Sekolah (RKS), Evaluasi Diri Sekolah (EDS).
-      </p>
+      <h1 className="text-2xl font-bold">Dokument Pendukung</h1>
+      <p className="mb-8">Unggah dan cari dokumen pendukung yang tersedia.</p>
       <div className="mb-8">
         <SupportDocForm />
       </div>

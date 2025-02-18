@@ -37,7 +37,7 @@ export function SupportDocList() {
 
     try {
       const response = await fetch(
-        `/api/evaluation/evaluation-search?query=${encodeURIComponent(
+        `/api/mongo-api/support-document-search?query=${encodeURIComponent(
           searchQuery
         )}`
       );
