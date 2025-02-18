@@ -13,6 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useToast } from "@/hooks/use-toast";
 
 // icons
 import { Search, Trash } from "lucide-react";
@@ -28,6 +29,7 @@ export function SupportDocList() {
   const [files, setFiles] = useState<File[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const { toast } = useToast();
 
   const searchFiles = useCallback(async () => {
     if (!searchQuery.trim()) {
@@ -68,22 +70,40 @@ export function SupportDocList() {
         a.click();
         window.URL.revokeObjectURL(url);
         document.body.removeChild(a);
+        toast({
+          title: "Download started",
+          description: "Your file download has begun.",
+        });
       } else {
-        // Check the Content-Type header to decide how to parse the error response
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.includes("application/json")) {
           const errorData = await response.json();
           console.error("Failed to download file:", errorData.error);
+          toast({
+            title: "Download failed",
+            description: errorData.error || "Could not download file.",
+            variant: "destructive",
+          });
         } else {
           const text = await response.text();
           console.error(
             "Failed to download file, server responded with:",
             text
           );
+          toast({
+            title: "Download failed",
+            description: "An unexpected response was received from the server.",
+            variant: "destructive",
+          });
         }
       }
     } catch (err) {
       console.error("Error downloading file:", err);
+      toast({
+        title: "Download error",
+        description: "An error occurred while downloading the file.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -95,14 +115,28 @@ export function SupportDocList() {
       if (response.ok) {
         const data = await response.json();
         console.log(data.message);
+        toast({
+          title: "File deleted",
+          description: "The file has been deleted successfully.",
+        });
         // Optionally, update your file list after deletion
         setFiles((prev) => prev.filter((file) => file._id !== fileId));
       } else {
         const data = await response.json();
         console.error("Failed to delete file:", data.error);
+        toast({
+          title: "Delete failed",
+          description: data.error || "Could not delete file.",
+          variant: "destructive",
+        });
       }
     } catch (err) {
       console.error("Error deleting file:", err);
+      toast({
+        title: "Delete error",
+        description: "An error occurred while deleting the file.",
+        variant: "destructive",
+      });
     }
   };
 
