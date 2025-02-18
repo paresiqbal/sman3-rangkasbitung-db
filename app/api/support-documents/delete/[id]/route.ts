@@ -2,15 +2,17 @@ import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 
-interface RouteContext {
-  params: {
-    id: string;
-  };
+interface RouteParams {
+  id: string;
 }
 
-export async function DELETE(request: Request, { params }: RouteContext) {
+interface RouteContext {
+  params: RouteParams;
+}
+
+export async function DELETE(request: Request, context: RouteContext) {
   try {
-    const { id } = params;
+    const { id } = context.params;
     const client = await clientPromise;
     const db = client.db("academic-documents");
     const collection = db.collection("support-documents");
