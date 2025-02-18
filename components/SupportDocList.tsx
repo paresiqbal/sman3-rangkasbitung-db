@@ -69,8 +69,18 @@ export function SupportDocList() {
         window.URL.revokeObjectURL(url);
         document.body.removeChild(a);
       } else {
-        const errorData = await response.json();
-        console.error("Failed to download file:", errorData.error);
+        // Check the Content-Type header to decide how to parse the error response
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          console.error("Failed to download file:", errorData.error);
+        } else {
+          const text = await response.text();
+          console.error(
+            "Failed to download file, server responded with:",
+            text
+          );
+        }
       }
     } catch (err) {
       console.error("Error downloading file:", err);
