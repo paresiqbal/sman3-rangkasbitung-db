@@ -32,7 +32,7 @@ export function StudentTaskList() {
       try {
         const { data, error } = await supabase.storage
           .from("academic-documents")
-          .list("academic");
+          .list("student-task");
 
         if (error) throw error;
 
@@ -77,7 +77,7 @@ export function StudentTaskList() {
     try {
       const { data, error } = await supabase.storage
         .from("academic-documents")
-        .createSignedUrl(`academic/${fileName}`, 60);
+        .createSignedUrl(`student-task/${fileName}`, 60);
 
       if (error) throw error;
 
@@ -103,7 +103,7 @@ export function StudentTaskList() {
     try {
       const { error } = await supabase.storage
         .from("academic-documents")
-        .remove([`academic/${fileName}`]);
+        .remove([`student-task/${fileName}`]);
 
       if (error) throw error;
 

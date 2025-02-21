@@ -19,7 +19,7 @@ export function StudentTaskForm() {
     setUploadStatus(null);
 
     try {
-      const filePath = `academic/${file.name}`;
+      const filePath = `student-task/${file.name}`;
       const { data, error } = await supabase.storage
         .from("academic-documents")
         .upload(filePath, file, {
