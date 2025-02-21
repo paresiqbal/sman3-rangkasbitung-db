@@ -40,7 +40,8 @@ Students can visit the student dashboard to download the files they need.
 
 ## Screenshots
 ![image](https://github.com/user-attachments/assets/db43e913-49e9-4472-874d-0fc1760a873e)
-![image](https://github.com/user-attachments/assets/f3b12566-3774-4070-a5f0-8c7d13de9473)
+![image](https://github.com/user-attachments/assets/4218b90b-5adf-4520-888f-7bb5e1711487)
+
 
 
 
